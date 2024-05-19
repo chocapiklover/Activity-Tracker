@@ -10,10 +10,11 @@ interface ActivityListProps {
   activities: Activity[];
   onStart: (index: number) => void;
   onStop: (index: number) => void;
-  onReset: (index: number) => void;
+  
+  onRemove: (index: number) => void;
 }
 
-const ActivityList: React.FC<ActivityListProps> = ({ activities, onStart, onStop, onReset }) => {
+const ActivityList: React.FC<ActivityListProps> = ({ activities, onStart, onStop, onRemove }) => {
   return (
     <div className="mt-4">
       <h2 className="text-xl font-bold mb-2">Activity List</h2>
@@ -38,8 +39,9 @@ const ActivityList: React.FC<ActivityListProps> = ({ activities, onStart, onStop
               >
                 Stop
               </button>
-              <button onClick={() => onReset(index)} className="bg-gray-500 text-white px-4 py-2 rounded">
-                Reset
+              
+              <button onClick={() => onRemove(index)} className="bg-red-500 text-white px-4 py-2 mr-2 rounded">
+                Remove
               </button>
             </div>
           </li>
