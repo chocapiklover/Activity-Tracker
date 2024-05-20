@@ -31,7 +31,11 @@ const ActivityTracker: React.FC = () => {
 
   // Adds new activity to Activities array
   const handleAddActivity = () => {
-    setActivities([...activities, { name: currentActivity, time: 0, isRunning: false }]);
+    if (currentActivity.trim() === '') {
+        // Prevent adding an activity if the input is empty or only contains whitespace
+        return;
+    }
+    setActivities([...activities, { name: currentActivity, time: 0, isRunning: true }]);
     setCurrentActivity('');
   };
 
@@ -67,26 +71,27 @@ const ActivityTracker: React.FC = () => {
   };
 
   return (
-    <div className="mt-4">
-      <input
-        type="text"
-        value={currentActivity}
-        onChange={(e) => setCurrentActivity(e.target.value)}
-        className="border rounded p-2 mr-2"
-        placeholder="Activity name"
-      />
-      <button 
-        onClick={handleAddActivity}
-        className="bg-blue-500 text-white px-4 py-2 rounded">
-        Add Activity
-      </button>
-      <ActivityList 
-        activities={activities}
-        onStart={handleStart}
-        onStop={handleStop}
-        onRemove={handleRemove}
-         />
-    </div>
+    <div className="flex flex-col items-center justify-center mt-4">
+  <input
+    type="text"
+    value={currentActivity}
+    onChange={(e) => setCurrentActivity(e.target.value)}
+    className="border rounded p-2 mb-2 w-64"
+    placeholder="Activity name"
+  />
+  <button
+    onClick={handleAddActivity}
+    className="bg-blue-500 text-white px-4 py-2 rounded mb-4">
+    Start
+  </button>
+  <ActivityList
+    activities={activities}
+    onStart={handleStart}
+    onStop={handleStop}
+    onRemove={handleRemove}
+  />
+</div>
+
   );
 };
 

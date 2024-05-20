@@ -17,30 +17,35 @@ interface ActivityListProps {
 const ActivityList: React.FC<ActivityListProps> = ({ activities, onStart, onStop, onRemove }) => {
   return (
     <div className="mt-4">
-      <h2 className="text-xl font-bold mb-2">Activity List</h2>
-      <ul>
+      <h2 className="text-3xl text-center font-bold mb-2">Activity List</h2>
+      <ul className=' space-y-2 '>
         {activities.map((activity, index) => (
-          <li key={index} className="border-b py-2 flex justify-between items-center">
-            <span>
-              {activity.name}: {new Date(activity.time * 1000).toISOString().slice(11, 19)}
+          <li key={index} className="border rounded-xl py-2 flex flex-col justify-between items-center">
+            <span 
+                className='mx-3 my-6 text-xl font-semibold '>
+                {activity.name}
             </span>
-            <div>
+            <span 
+                className='mx-3 text-xl font-semibold '>
+                 {new Date(activity.time * 1000).toISOString().slice(11, 19)}
+            </span>
+            <div className='mx-4 mt-6 my-2'>
               <button
                 onClick={() => onStart(index)}
-                className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+                className="bg-green-400 text-white px-4 py-2 rounded mr-2"
                 disabled={activity.isRunning}
               >
                 Start
               </button>
               <button
                 onClick={() => onStop(index)}
-                className="bg-red-500 text-white px-4 py-2 rounded mr-2"
+                className="bg-orange-300 text-white px-4 py-2 rounded mr-2"
                 disabled={!activity.isRunning}
               >
-                Stop
+                Pause
               </button>
               
-              <button onClick={() => onRemove(index)} className="bg-red-500 text-white px-4 py-2 mr-2 rounded">
+              <button onClick={() => onRemove(index)} className="bg-red-400 text-white px-4 py-2 mr-2 rounded">
                 Remove
               </button>
             </div>
